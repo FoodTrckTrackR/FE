@@ -1,3 +1,18 @@
+* {
+  box-sizing: border-box;
+  max-width: 100%;
+  /* border: 1px solid black; */
+}
+
 .App {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: floralwhite;
+}
+
+.title-container {
+  color: orangered;
+  font-size: 2rem;
 }
