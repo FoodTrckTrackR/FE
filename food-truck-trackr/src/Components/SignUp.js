@@ -26,6 +26,7 @@ export default function SignUp (props) {
                     <div>{errors.username}</div>
                     <div>{errors.password}</div>
                     <div>{errors.email}</div>
+                    <div>{errors.tos}</div>
                 </div>
             </div>
             <div className="input-container">
@@ -36,7 +37,7 @@ export default function SignUp (props) {
                     <input name="password" type="text" placeholder="password" onChange={onChange} value={values.password} />
                 </label>
                 <label>E-Mail:
-                    <input name="email" type="text" placeholder="email" onChange={onChange} value={values.email} />
+                    <input name="email" type="email" placeholder="email" onChange={onChange} value={values.email} />
                 </label>
                 <label id="tos">Terms Of Service
                     <input name="tos" type="checkbox" onChange={onChange} checked={values.tos} />

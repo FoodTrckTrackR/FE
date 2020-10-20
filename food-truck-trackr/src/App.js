@@ -92,7 +92,7 @@ export default function App() {
         </Route>
 
         <Route path="/LogIn">
-          <LogIn />
+          <LogIn values={formValues} change={inputChange} submit={formSubmit} errors={formErrors} disabled={disabled} />
         </Route>
 
         <Route path="/">
