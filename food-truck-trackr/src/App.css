@@ -17,14 +17,26 @@
   display: flex;
   justify-content: space-around;
   width: 50%;
+  padding-bottom: 1%;
   border-bottom: 3px solid orangered;
+}
+
+.nav-top a:hover {
+  transform: scale(1.5);
+  transition: 0.5s;
 }
 
 .nav-bottom {
   display: flex;
   justify-content: space-around;
   width: 50%;
+  padding-top: 1%;
   border-top: 3px solid orangered;
+}
+
+.nav-bottom a:hover {
+  transform: scale(1.5);
+  transition: 0.5s;
 }
 
 a {

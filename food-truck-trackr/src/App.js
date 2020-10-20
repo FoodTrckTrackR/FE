@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Switch, Route, Link} from "react-router-dom"
+import * as yup from "yup"
+import schema from "./Validation/form-schema"
 import './App.css'
 import logo from "./Images/food-truck-trackr_logo.png"
 import SignUp from "./Components/SignUp"
 import LogIn from "./Components/LogIn"
+import Axios from 'axios';
 
 const initialFormValues = {
   username: "",
@@ -12,34 +15,69 @@ const initialFormValues = {
   tos: false,
 }
 
+const initialFormErrors = {
+  username: "",
+  password: "",
+  email: "",
+  tos: "",
+}
+
 const initialUsers = []
+const initialDisabled = true
 
 export default function App() {
   const [users, setUsers] = useState(initialUsers)
   const [formValues, setFormValues] = useState(initialFormValues)
+  const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [disabled, setDisabled] = useState(initialDisabled)
 
   const inputChange = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({
+          ...formErrors,
+          [name]: "",
+        })
+      })
+      .catch(err => {
+        setFormErrors({
+          ...formErrors,
+          [name]: err.errors[0],
+        })
+      })
+
     setFormValues({
       ...formValues,
       [name]: value,
     })
   }
 
-  const postNewUser = newUser => {
-    setUsers(users.concat(newUser))
-    setFormValues(initialFormValues)
-  }
-
   const formSubmit =() => {
-    const newUser = {
+    let newUser = {
       name: formValues.username.trim(),
       password: formValues.password,
       email: formValues.email.trim(),
       tos: formValues.tos,
     }
-    postNewUser(newUser)
+    Axios.post("https://reqres.in/api/users", newUser)
+      .then(res => {
+        console.log(res)
+        setUsers([...users, res.data])
+        setFormValues(initialFormValues)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
-  console.log(users)
+
+  useEffect(() => {
+    schema.isValid(formValues).then(valid => {
+      setDisabled(!valid)
+    })
+  }, [formValues])
+
   return (
     <div className="App">
       <div className="nav-top">
@@ -50,7 +88,7 @@ export default function App() {
 
       <Switch>
         <Route path="/SignUp">
-          <SignUp values={formValues} change={inputChange} submit={formSubmit} />
+          <SignUp values={formValues} change={inputChange} submit={formSubmit} errors={formErrors} disabled={disabled} />
         </Route>
 
         <Route path="/LogIn">

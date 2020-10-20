@@ -4,7 +4,7 @@ import {Link} from "react-router-dom"
 import "./SignUp.css"
 
 export default function SignUp (props) {
-    const { values, change, submit } = props
+    const { values, change, submit, errors, disabled } = props
 
     const onChange = evt => {
         const { name, value, type, checked } = evt.target
@@ -22,6 +22,11 @@ export default function SignUp (props) {
             <div className="title-container">
                 <img src={logo} alt="Logo" />
                 <h2>Sign-up</h2>
+                <div className="error-container">
+                    <div>{errors.username}</div>
+                    <div>{errors.password}</div>
+                    <div>{errors.email}</div>
+                </div>
             </div>
             <div className="input-container">
                 <label>Username:
@@ -38,7 +43,7 @@ export default function SignUp (props) {
                 </label>
             </div>
             <div className="submit-container">
-                <button>Submit</button>
+                <button disabled={disabled}>Submit</button>
             </div>
             <Link to="/LogIn" className="already-link">Already a member?</Link>
         </form>
