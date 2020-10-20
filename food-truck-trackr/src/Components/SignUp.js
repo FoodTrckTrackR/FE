@@ -40,7 +40,7 @@ export default function SignUp (props) {
             <div className="submit-container">
                 <button>Submit</button>
             </div>
-            <Link to="/LogIn" id="already-a-member">Already a member?</Link>
+            <Link to="/LogIn" className="already-link">Already a member?</Link>
         </form>
     )
 }
