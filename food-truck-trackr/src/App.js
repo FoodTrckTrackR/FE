@@ -8,6 +8,8 @@ import SignUp from "./Components/SignUp"
 import LogIn from "./Components/LogIn"
 import Axios from 'axios';
 
+import {connect} from 'react-redux'
+
 const initialFormValues = {
   username: "",
   password: "",
@@ -25,7 +27,8 @@ const initialFormErrors = {
 const initialUsers = []
 const initialDisabled = true
 
-export default function App() {
+const App = (props) => {
+  console.log(props);
   const [users, setUsers] = useState(initialUsers)
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
@@ -111,3 +114,13 @@ export default function App() {
     </div>
   );
 }
+
+const mapToStateProps = state => {
+  console.log(state);
+  return {
+    initialFormValues: state.initialFormValues,
+    initialFormErrors: state.initialFormErrors
+
+  }
+}
+export default connect((mapToStateProps), {})(App)

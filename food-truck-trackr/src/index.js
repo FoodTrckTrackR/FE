@@ -7,8 +7,8 @@ import App from './App';
 //importing redux provider
 import { Provider } from 'react-redux';
 
-import 'bulma/css/bulma.css';
-import './styles.scss';
+// import 'bulma/css/bulma.css';
+// import './styles.scss';
 
 //importing our createStore & reducer
 import { createStore } from 'redux';
