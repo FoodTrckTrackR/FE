@@ -1,11 +1,45 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Switch, Route, Link} from "react-router-dom"
 import './App.css'
 import logo from "./Images/food-truck-trackr_logo.png"
 import SignUp from "./Components/SignUp"
 import LogIn from "./Components/LogIn"
 
+const initialFormValues = {
+  username: "",
+  password: "",
+  email: "",
+  tos: false,
+}
+
+const initialUsers = []
+
 export default function App() {
+  const [users, setUsers] = useState(initialUsers)
+  const [formValues, setFormValues] = useState(initialFormValues)
+
+  const inputChange = (name, value) => {
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    })
+  }
+
+  const postNewUser = newUser => {
+    setUsers(users.concat(newUser))
+    setFormValues(initialFormValues)
+  }
+
+  const formSubmit =() => {
+    const newUser = {
+      name: formValues.username.trim(),
+      password: formValues.password,
+      email: formValues.email.trim(),
+      tos: formValues.tos,
+    }
+    postNewUser(newUser)
+  }
+  console.log(users)
   return (
     <div className="App">
       <div className="nav-top">
@@ -16,7 +50,7 @@ export default function App() {
 
       <Switch>
         <Route path="/SignUp">
-          <SignUp />
+          <SignUp values={formValues} change={inputChange} submit={formSubmit} />
         </Route>
 
         <Route path="/LogIn">
