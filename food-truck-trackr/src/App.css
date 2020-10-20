@@ -17,14 +17,26 @@
   display: flex;
   justify-content: space-around;
   width: 50%;
-  border-bottom: 3px solid orangered;
+  padding-bottom: 1%;
+  border-bottom: 3px solid rgba(255, 68, 0, 0.5);
+}
+
+.nav-top a:hover {
+  transform: scale(1.5);
+  transition: 0.5s;
 }
 
 .nav-bottom {
   display: flex;
   justify-content: space-around;
   width: 50%;
-  border-top: 3px solid orangered;
+  padding-top: 1%;
+  border-top: 3px solid rgba(255, 68, 0, 0.5);
+}
+
+.nav-bottom a:hover {
+  transform: scale(1.5);
+  transition: 0.5s;
 }
 
 a {

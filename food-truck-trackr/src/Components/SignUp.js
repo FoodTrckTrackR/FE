@@ -4,7 +4,7 @@ import {Link} from "react-router-dom"
 import "./SignUp.css"
 
 export default function SignUp (props) {
-    const { values, change, submit } = props
+    const { values, change, submit, errors, disabled } = props
 
     const onChange = evt => {
         const { name, value, type, checked } = evt.target
@@ -22,6 +22,12 @@ export default function SignUp (props) {
             <div className="title-container">
                 <img src={logo} alt="Logo" />
                 <h2>Sign-up</h2>
+                <div className="error-container">
+                    <div>{errors.username}</div>
+                    <div>{errors.password}</div>
+                    <div>{errors.email}</div>
+                    <div>{errors.tos}</div>
+                </div>
             </div>
             <div className="input-container">
                 <label>Username:
@@ -31,16 +37,16 @@ export default function SignUp (props) {
                     <input name="password" type="text" placeholder="password" onChange={onChange} value={values.password} />
                 </label>
                 <label>E-Mail:
-                    <input name="email" type="text" placeholder="email" onChange={onChange} value={values.email} />
+                    <input name="email" type="email" placeholder="email" onChange={onChange} value={values.email} />
                 </label>
                 <label id="tos">Terms Of Service
                     <input name="tos" type="checkbox" onChange={onChange} checked={values.tos} />
                 </label>
             </div>
             <div className="submit-container">
-                <button>Submit</button>
+                <button disabled={disabled}>Submit</button>
             </div>
-            <Link to="/LogIn" id="already-a-member">Already a member?</Link>
+            <Link to="/LogIn" className="already-link">Already a member?</Link>
         </form>
     )
 }
