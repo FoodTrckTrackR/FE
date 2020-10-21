@@ -7,33 +7,32 @@ import logo from "./Images/food-truck-trackr_logo.png"
 import SignUp from "./Components/SignUp"
 import LogIn from "./Components/LogIn"
 import Axios from 'axios';
-
 import {connect} from 'react-redux'
+import {registerMe} from './actions'
 
-const initialFormValues = {
-  username: "",
-  password: "",
-  email: "",
-  tos: false,
-}
+// const initialFormValues = {
+//   username: "",
+//   password: "",
+//   email: "",
+//   tos: false,
+// }
 
-const initialFormErrors = {
-  username: "",
-  password: "",
-  email: "",
-  tos: "",
-}
+// const initialFormErrors = {
+//   username: "",
+//   password: "",
+//   email: "",
+//   tos: "",
+// }
 
-const initialUsers = []
-const initialDisabled = true
+// const initialUsers = []
+// const initialDisabled = true
 
 const App = (props) => {
-  console.log(props);
-  const [users, setUsers] = useState(initialUsers)
-  const [formValues, setFormValues] = useState(initialFormValues)
-  const [formErrors, setFormErrors] = useState(initialFormErrors)
-  const [disabled, setDisabled] = useState(initialDisabled)
 
+  const [users, setUsers] = useState(props.Users)
+  const [formValues, setFormValues] = useState(props.FormValues)
+  const [formErrors, setFormErrors] = useState(props.FormErrors)
+  const [disabled, setDisabled] = useState(props.Disabled)
   const inputChange = (name, value) => {
     yup
       .reach(schema, name)
@@ -68,7 +67,7 @@ const App = (props) => {
       .then(res => {
         console.log(res)
         setUsers([...users, res.data])
-        setFormValues(initialFormValues)
+        setFormValues(props.FormValues)
       })
       .catch(err => {
         console.log(err)
@@ -91,7 +90,7 @@ const App = (props) => {
 
       <Switch>
         <Route path="/SignUp">
-          <SignUp values={formValues} change={inputChange} submit={formSubmit} errors={formErrors} disabled={disabled} />
+          <SignUp registerMe={props.registerMe} Users={props.Users} values={formValues} change={inputChange} submit={formSubmit} errors={formErrors} disabled={disabled} />
         </Route>
 
         <Route path="/LogIn">
@@ -114,13 +113,15 @@ const App = (props) => {
     </div>
   );
 }
-
 const mapToStateProps = state => {
   console.log(state);
   return {
-    initialFormValues: state.initialFormValues,
-    initialFormErrors: state.initialFormErrors
+
+    FormValues: state.FormValues,
+    FormErrors: state.FormErrors,
+    Users: state.Users,
+    Disabled: state.Disabled
 
   }
 }
-export default connect((mapToStateProps), {})(App)
+export default connect((mapToStateProps), {registerMe})(App)

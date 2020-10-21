@@ -2,9 +2,11 @@ import React from "react"
 import logo from "../Images/food-truck-trackr_logo.png"
 import {Link} from "react-router-dom"
 import "./SignUp.css"
+import { connect } from "react-redux"
 
-export default function SignUp (props) {
-    const { values, change, submit, errors, disabled } = props
+
+const SignUp = (props) => {
+    const { values, change, submit, errors, disabled, Users } = props
 
     const onChange = evt => {
         const { name, value, type, checked } = evt.target
@@ -14,7 +16,9 @@ export default function SignUp (props) {
 
     const onSubmit = evt => {
         evt.preventDefault()
-        submit()
+        // submit()
+        console.log('test');
+        props.registerMe(Users)
     }
 
     return (
@@ -34,7 +38,7 @@ export default function SignUp (props) {
                     <input name="username" type="text" placeholder="username" onChange={onChange} value={values.username} />
                 </label>
                 <label>Password:
-                    <input name="password" type="text" placeholder="password" onChange={onChange} value={values.password} />
+                    <input name="password" type="password" placeholder="password" onChange={onChange} value={values.password} />
                 </label>
                 <label>E-Mail:
                     <input name="email" type="email" placeholder="email" onChange={onChange} value={values.email} />
@@ -50,3 +54,16 @@ export default function SignUp (props) {
         </form>
     )
 }
+
+// const mapStateToProps = state => {
+//     console.log(state);
+//     return {
+//       FormValues: state.FormValues,
+//       FormErrors: state.FormErrors,
+//       Users: state.Users,
+//       Disabled: state.Disabled
+  
+//     }
+//   }
+
+export default connect(null, {}) (SignUp)

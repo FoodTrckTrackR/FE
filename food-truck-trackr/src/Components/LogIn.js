@@ -31,7 +31,7 @@ export default function LogIn (props) {
                     <input name="username" type="text" placeholder="username" onChange={onChange} value={values.username} />
                 </label>
                 <label>Password:
-                    <input name="password" type="text" placeholder="password" onChange={onChange} value={values.password} />
+                    <input name="password" type="password" placeholder="password" onChange={onChange} value={values.password} />
                 </label>
             </div>
             <div className="submit-container">

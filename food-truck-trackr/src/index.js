@@ -7,14 +7,14 @@ import App from './App';
 //importing redux provider
 import { Provider } from 'react-redux';
 
-// import 'bulma/css/bulma.css';
-// import './styles.scss';
-
+import thunk from 'redux-thunk'
 //importing our createStore & reducer
-import { createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
+import { logger } from 'redux-logger'
 import { reducer } from './reducer/index';
 //creating store which calls the reducer
-const store = createStore(reducer);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk, logger)));
 
 const rootElement = document.getElementById('root');
 
