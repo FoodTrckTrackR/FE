@@ -26,6 +26,7 @@ export default function SignUp (props) {
                     <div>{errors.username}</div>
                     <div>{errors.password}</div>
                     <div>{errors.email}</div>
+                    <div>{errors.role}</div>
                     <div>{errors.tos}</div>
                 </div>
             </div>
@@ -38,6 +39,13 @@ export default function SignUp (props) {
                 </label>
                 <label>E-Mail:
                     <input name="email" type="email" placeholder="email" onChange={onChange} value={values.email} />
+                </label>
+                <label>Role:
+                    <select name="role" value={values.role} onChange={onChange}>
+                        <option value="">--select role--</option>
+                        <option value="diner">Diner</option>
+                        <option value="operator">Operator</option>
+                    </select>
                 </label>
                 <label id="tos">Terms Of Service
                     <input name="tos" type="checkbox" onChange={onChange} checked={values.tos} />

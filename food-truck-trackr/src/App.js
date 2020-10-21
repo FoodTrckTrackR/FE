@@ -12,6 +12,7 @@ const initialFormValues = {
   username: "",
   password: "",
   email: "",
+  role: "",
   tos: false,
 }
 
@@ -19,6 +20,7 @@ const initialFormErrors = {
   username: "",
   password: "",
   email: "",
+  role: "",
   tos: "",
 }
 
@@ -59,6 +61,7 @@ export default function App() {
       name: formValues.username.trim(),
       password: formValues.password,
       email: formValues.email.trim(),
+      role: formValues.role,
       tos: formValues.tos,
     }
     Axios.post("https://reqres.in/api/users", newUser)

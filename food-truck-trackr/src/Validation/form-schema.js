@@ -12,6 +12,9 @@ export default yup.object().shape({
     email: yup
         .string()
         .required("Must provide an email address"),
+    role: yup
+        .string()
+        .oneOf(["diner", "operator"], "Must select a role"),
     tos: yup
         .boolean()
         .oneOf([true], "Must accept Term Of Service"),
