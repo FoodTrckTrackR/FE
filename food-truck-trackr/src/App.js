@@ -8,6 +8,9 @@ import SignUp from "./Components/SignUp"
 import LogIn from "./Components/LogIn"
 import Axios from 'axios';
 
+import {connect} from 'react-redux'
+import {registerMe} from './actions'
+
 const initialFormValues = {
   username: "",
   password: "",
@@ -24,11 +27,11 @@ const initialFormErrors = {
   tos: "",
 }
 
-const initialUsers = []
+const newUsers = []
 const initialDisabled = true
 
-export default function App() {
-  const [users, setUsers] = useState(initialUsers)
+const App = (props) => {
+  const [users, setUsers] = useState(newUsers)
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
@@ -91,7 +94,7 @@ export default function App() {
 
       <Switch>
         <Route path="/SignUp">
-          <SignUp values={formValues} change={inputChange} submit={formSubmit} errors={formErrors} disabled={disabled} />
+          <SignUp newUsers={newUsers} values={formValues} change={inputChange} submit={formSubmit} errors={formErrors} disabled={disabled} />
         </Route>
 
         <Route path="/LogIn">
@@ -114,3 +117,10 @@ export default function App() {
     </div>
   );
 }
+const mapStateToProps = state => {
+  console.log('mapToStateProps', state);
+  return {
+
+  }
+}
+export default connect((mapStateToProps), {registerMe})(App)

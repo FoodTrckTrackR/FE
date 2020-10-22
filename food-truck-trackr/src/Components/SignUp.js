@@ -3,8 +3,11 @@ import logo from "../Images/food-truck-trackr_logo.png"
 import {Link} from "react-router-dom"
 import "./SignUp.css"
 
-export default function SignUp (props) {
-    const { values, change, submit, errors, disabled } = props
+import { connect } from "react-redux"
+import { registerMe } from '../actions'
+
+const SignUp = (props) => {
+    const { values, change, submit, errors, disabled, newUser } = props
 
     const onChange = evt => {
         const { name, value, type, checked } = evt.target
@@ -14,7 +17,9 @@ export default function SignUp (props) {
 
     const onSubmit = evt => {
         evt.preventDefault()
-        submit()
+        submit();
+        console.log('test');
+        props.registerMe(newUser)
     }
 
     return (
@@ -58,3 +63,5 @@ export default function SignUp (props) {
         </form>
     )
 }
+
+export default connect(null, {registerMe}) (SignUp)
