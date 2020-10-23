@@ -3,9 +3,8 @@ import {REGISTER_START, REGISTER_ERROR, REGISTER_SUCCESS} from '../actions/'
 const initialState = {
   
     isIdle: true,
-    isLoading: false,
-    isSuccess: false, 
-    isError: '',
+    isLoading: false, 
+    isError: false,
     
 }
 
@@ -15,24 +14,23 @@ const initialState = {
     case REGISTER_SUCCESS:
         return {
             ...state,
-            isIdle: false,
-            isLoading: true,
-            isError: '',
-            isSuccess: false,
-            newUsers: [action.payload],
+            isIdle: true,
+            isLoading: false,
+            isError: false,
+           
         };
     case REGISTER_START:
         return{
             ...state,
             isIdle: true,
             isLoading: false,
-            isSuccess: false,
+            isError: false,
         };
     
     case REGISTER_ERROR:
     return{
         ...state,
-        isError: action.payload
+        isError: true,
     }
     
     default:
